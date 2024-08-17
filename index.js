@@ -48,28 +48,14 @@ $(".btn").click(function(){
     checkAnswer(userClickedPattern.length -1)
   })
 
-  function playSound(name) {
-    let a = new Audio(`sounds/${name}.mp3`);
-    a.play()
-  }
-
-  function animatePress(currentColor) {
-    $(`#${currentColor}`).addClass("pressed")
-    setTimeout(function () {
-        $(`#${currentColor}`).removeClass("pressed");
-      },100)
- }
-
  function checkAnswer(currentLevel) {
     //check if the most recent user answer is the same as the game pattern.
     if(gamePatterns[currentLevel] === userClickedPattern[currentLevel]){
-        console.log('success')
         //then check that they have finished their sequence
         if (gamePatterns.length === userClickedPattern.length) {
             setTimeout(nextSequence,1000)
         }
     } else {
-        console.log('wrong')
         $("#level-title").text("Game Over, Press Any Key to Restart")
         playSound('wrong')
         $("body").addClass("game-over")
@@ -85,4 +71,18 @@ $(".btn").click(function(){
     level = 0
     gamePatterns = []
     started = false
+ }
+
+ //play audio
+ function playSound(name) {
+    let a = new Audio(`sounds/${name}.mp3`);
+    a.play()
+  }
+
+  //add animation
+  function animatePress(currentColor) {
+    $(`#${currentColor}`).addClass("pressed")
+    setTimeout(function () {
+        $(`#${currentColor}`).removeClass("pressed");
+      },100)
  }
