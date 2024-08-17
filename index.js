@@ -12,6 +12,8 @@ function nextSequence() {
     $(`#${randomChosenColor}`).fadeOut(100).fadeIn(100).fadeOut(100).fadeIn(100)
     //add audio to the button
     playSound(randomChosenColor)
+    animatePress(randomChosenColor)
+
 }
 
 //detect when any of the buttons are clicked 
@@ -22,9 +24,18 @@ $(".btn").click(function(){
     userClickedPattern.push(userChosenColor)
     //add audio to the button
     playSound(userChosenColor)
+    //add animation
+    animatePress(userChosenColor)
   })
 
   function playSound(name) {
     let a = new Audio(`sounds/${name}.mp3`);
     a.play()
   }
+
+  function animatePress(currentColor) {
+    $(`#${currentColor}`).addClass("pressed")
+    setTimeout(function () {
+        $(`#${currentColor}`).removeClass("pressed");
+      },100)
+ }
