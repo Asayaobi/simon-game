@@ -70,5 +70,12 @@ $(".btn").click(function(){
         }
     } else {
         console.log('wrong')
+        $("#level-title").text("Game Over, Press Any Key to Restart")
+        playSound('wrong')
+        $("body").addClass("game-over")
+        setTimeout(function () {
+            $("body").removeClass("game-over");
+          },200)
+
     }
  }
