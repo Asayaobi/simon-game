@@ -76,6 +76,13 @@ $(".btn").click(function(){
         setTimeout(function () {
             $("body").removeClass("game-over");
           },200)
-
+        startOver()
     }
+ }
+
+ //reset the value to restart the game
+ function startOver() {
+    level = 0
+    gamePatterns = []
+    started = false
  }
