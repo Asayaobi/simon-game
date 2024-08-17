@@ -1,6 +1,8 @@
 let buttonColors = ["red", "blue", "green", "yellow"]
 let gamePatterns = []
 let userClickedPattern = []
+let level = 0
+let started = false
 
 function nextSequence() {
     //pick random color for the game
@@ -13,6 +15,9 @@ function nextSequence() {
     //add audio to the button
     playSound(randomChosenColor)
     animatePress(randomChosenColor)
+    //add a level to display on #level-title
+    level++
+    $("#level-title").text(`Level ${level}`)
 
 }
 
@@ -39,3 +44,12 @@ $(".btn").click(function(){
         $(`#${currentColor}`).removeClass("pressed");
       },100)
  }
+
+//start the game when the keyboard is pressed
+$(document).keydown(function(){
+    if (!started) {
+        nextSequence()
+        started = true
+        $("#level-title").text(`Level ${level}`)
+    }
+  })
