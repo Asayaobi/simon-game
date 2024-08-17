@@ -11,8 +11,7 @@ function nextSequence() {
     //add flash animation to the button
     $(`#${randomChosenColor}`).fadeOut(100).fadeIn(100).fadeOut(100).fadeIn(100)
     //add audio to the button
-    let a = new Audio(`sounds/${randomChosenColor}.mp3`);
-    a.play()
+    playSound(randomChosenColor)
 }
 
 //detect when any of the buttons are clicked 
@@ -21,4 +20,11 @@ $(".btn").click(function(){
     let userChosenColor = $(this).attr("id") 
     //assign to userClickedPattern array   
     userClickedPattern.push(userChosenColor)
+    //add audio to the button
+    playSound(userChosenColor)
   })
+
+  function playSound(name) {
+    let a = new Audio(`sounds/${name}.mp3`);
+    a.play()
+  }
