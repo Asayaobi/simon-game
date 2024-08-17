@@ -4,21 +4,33 @@ let userClickedPattern = []
 let level = 0
 let started = false
 
+//start the game when the keyboard is pressed
+$(document).keydown(function(){
+    if (!started) {
+        $("#level-title").text(`Level ${level}`)
+        nextSequence()
+        started = true
+    }
+  })
+
 function nextSequence() {
+    //clear the previous answer from user
+    userClickedPattern = []
+
+    //display level
+    level++
+    $("#level-title").text(`Level ${level}`)
+
     //pick random color for the game
     let randomNumber = Math.floor(Math.random()*4)
     let randomChosenColor = buttonColors[randomNumber]
     //assign to game pattern
     gamePatterns.push(randomChosenColor)
+
     //add flash animation to the button
     $(`#${randomChosenColor}`).fadeOut(100).fadeIn(100).fadeOut(100).fadeIn(100)
     //add audio to the button
     playSound(randomChosenColor)
-    animatePress(randomChosenColor)
-    //add a level to display on #level-title
-    level++
-    $("#level-title").text(`Level ${level}`)
-
 }
 
 //detect when any of the buttons are clicked 
@@ -27,10 +39,13 @@ $(".btn").click(function(){
     let userChosenColor = $(this).attr("id") 
     //assign to userClickedPattern array   
     userClickedPattern.push(userChosenColor)
+
     //add audio to the button
     playSound(userChosenColor)
     //add animation
     animatePress(userChosenColor)
+    //check answer
+    checkAnswer(userClickedPattern.length -1)
   })
 
   function playSound(name) {
@@ -45,11 +60,15 @@ $(".btn").click(function(){
       },100)
  }
 
-//start the game when the keyboard is pressed
-$(document).keydown(function(){
-    if (!started) {
-        nextSequence()
-        started = true
-        $("#level-title").text(`Level ${level}`)
+ function checkAnswer(currentLevel) {
+    //check if the most recent user answer is the same as the game pattern.
+    if(gamePatterns[currentLevel] === userClickedPattern[currentLevel]){
+        console.log('success')
+        //then check that they have finished their sequence
+        if (gamePatterns.length === userClickedPattern.length) {
+            setTimeout(nextSequence,1000)
+        }
+    } else {
+        console.log('wrong')
     }
-  })
+ }
