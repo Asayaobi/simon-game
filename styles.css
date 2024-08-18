@@ -1,6 +1,17 @@
 body {
   text-align: center;
   background-color: #011F3F;
+  display: flex;
+  justify-content: center;
+  align-items: center;    
+  height: 100vh;          
+  margin: 0; 
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column; /* Stack elements vertically */
+  align-items: center;    /* Center horizontally */
 }
 
 #level-title {
@@ -12,9 +23,7 @@ body {
 
 .container {
   display: block;
-  width: 50%;
   margin: auto;
-
 }
 
 .btn {
