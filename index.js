@@ -13,6 +13,15 @@ $(document).keydown(function(){
     }
   })
 
+// Handle touchstart event for mobile
+$(document).on("touchstart", function() {
+      if (!started) {
+        $("#level-title").text(`Level ${level}`)
+        nextSequence()
+        started = true
+    }
+  })
+
 function nextSequence() {
     //clear the previous answer from user
     userClickedPattern = []
